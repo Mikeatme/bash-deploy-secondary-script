@@ -2,6 +2,8 @@
 
 # Deploy target-script.sh to host 
 
+rc=1
+
 # Change the following variables
 filePath=/opt/scripts/
 fileName=target-script.sh
@@ -11,6 +13,7 @@ fileName=target-script.sh
 if [[ -d $filePath ]] ;  then                   # if path exists
     if [[ -f $filePath$fileName ]] ; then       # if file exists
         /usr/bin/echo "$filePath$fileName already exists. Bye"
+        rc=0
     else                                        # in case file does not exist but path does, print everything until EOF to file
         /usr/bin/cat << EOF > $filePath$fileName
         #!/bin/bash
@@ -24,7 +27,10 @@ if [[ -d $filePath ]] ;  then                   # if path exists
 EOF
         /usr/bin/chmod 700 $filePath$fileName   # Make the file executable
         /usr/bin/echo "Finished setting up $filePath$fileName"
+        rc=0
     fi
 else
     /usr/bin/echo "Error: $filePath does not exist! Aborting."
+    rc=1
 fi
+exit $rc
