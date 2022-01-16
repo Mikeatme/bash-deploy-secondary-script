@@ -2,7 +2,7 @@
 
 # Deploy target-script.sh to host 
 
-
+# Change the following variables
 filePath=/opt/scripts/
 fileName=target-script.sh
 
@@ -10,8 +10,8 @@ fileName=target-script.sh
 # Check if target-script exists and set it up
 if [[ -d $filePath ]] ;  then                   # if path exists
     if [[ -f $filePath$fileName ]] ; then       # if file exists
-        /usr/bin/echo '$filePath$fileName already exists. Bye'
-    else                                        # in case file does not exists but path does, print everything until EOF to file
+        /usr/bin/echo "$filePath$fileName already exists. Bye"
+    else                                        # in case file does not exist but path does, print everything until EOF to file
         /usr/bin/cat << EOF > $filePath$fileName
         #!/bin/bash
         # Your script goes her
